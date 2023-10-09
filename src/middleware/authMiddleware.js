@@ -12,7 +12,28 @@ const authMiddleware = (req, res, next) => {
             })
         }
         const { payload } = user
-        if(payload.role === 'admin') {
+        if(payload?.role === 'admin') {
+            next()
+        }else {
+            return res.status(404).json({
+                message: 'The authentication',
+                status: 'ERROR'
+            })
+        }
+    });
+}
+
+const authInstructorMiddleware = (req, res, next) => {
+    const token = req.headers.token.split(' ')[1]
+    jwt.verify(token, process.env.ACCESS_TOKEN, function(err, user) {
+        if(err) {
+            return res.status(404).json({
+                message: 'The authentication',
+                status: 'ERROR'
+            })
+        }
+        const { payload } = user
+        if(payload?.role === 'admin' || payload?.role === 'instructor') {
             next()
         }else {
             return res.status(404).json({
@@ -48,4 +69,5 @@ const authUserMiddleware = (req, res, next) => {
 module.exports = {
     authMiddleware,
     authUserMiddleware,
+    authInstructorMiddleware,
 }

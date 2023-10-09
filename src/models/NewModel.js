@@ -6,7 +6,7 @@ const newSchema = new mongoose.Schema(
         content: { type: String, required: true },
         images: [
             { 
-                image: { type: String, required: true },
+                image: { type: String },
             },
         ],
         author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
