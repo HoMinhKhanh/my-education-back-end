@@ -5,7 +5,7 @@ const createLesson = async (req, res) => {
         const { name, description, videoId, courseId, rating } = req.body
         if (!name || !videoId || !courseId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The input is required'
             })
         }
@@ -25,7 +25,7 @@ const updateLesson = async (req, res) => {
         const data = req.body
         if(!lessonId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The lessonId is require'
             })
         }
@@ -43,7 +43,7 @@ const getDetailsLesson = async (req, res) => {
         const lessonId = req.params.id
         if(!lessonId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The lessonId is require'
             })
         }
@@ -72,7 +72,7 @@ const deleteLesson = async (req, res) => {
         const lessonId = req.params.id
         if(!lessonId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The lessonId is require'
             })
         }

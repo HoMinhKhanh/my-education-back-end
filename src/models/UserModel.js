@@ -8,8 +8,6 @@ const userSchema = new mongoose.Schema(
         role: { type: String, required: true, default: 'student' },
         phone: { type: Number },
         avatar: { type: String },
-        access_token: { type: String },
-        refresh_token: { type: String },
     },
     {
         timestamps: true,

@@ -31,7 +31,7 @@ const updateNews = (id, data) => {
             })
             if (checkNews === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The news is not defined'
                 })
             }
@@ -56,7 +56,7 @@ const getDetailsNews = (id) => {
             })
             if (news === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The news is not defined',
                 })
             }
@@ -126,7 +126,7 @@ const deleteNews = (id) => {
             })
             if (checkNews === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The news is not defined'
                 })
             }

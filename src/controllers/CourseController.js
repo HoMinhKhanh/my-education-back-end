@@ -5,7 +5,7 @@ const createCourse = async (req, res) => {
         const { name, description, image, type, level, price, listLessons } = req.body
         if (!name || !description || !type || !price) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The input is required'
             })
         }
@@ -25,7 +25,7 @@ const updateCourse = async (req, res) => {
         const data = req.body
         if(!courseId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The courseId is require'
             })
         }
@@ -43,7 +43,7 @@ const getDetailsCourse = async (req, res) => {
         const courseId = req.params.id
         if(!courseId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The courseId is require'
             })
         }
@@ -72,7 +72,7 @@ const deleteCourse = async (req, res) => {
         const courseId = req.params.id
         if(!courseId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The courseId is require'
             })
         }

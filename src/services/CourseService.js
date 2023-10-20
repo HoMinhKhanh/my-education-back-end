@@ -34,7 +34,7 @@ const updateCourse = (id, data) => {
             })
             if (checkCourse === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The course is not defined'
                 })
             }
@@ -59,7 +59,7 @@ const getDetailsCourse = (id) => {
             })
             if (course === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The course is not defined',
                 })
             }
@@ -98,7 +98,7 @@ const deleteCourse = (id) => {
             })
             if (checkCourse === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The course is not defined'
                 })
             }

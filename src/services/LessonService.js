@@ -9,7 +9,7 @@ const createLesson = (newLesson) => {
             })
             if (checkLesson !== null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The name of lesson is already in use'
                 })
             }
@@ -41,7 +41,7 @@ const updateLesson = (id, data) => {
             })
             if (checkLesson === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The lesson is not defined'
                 })
             }
@@ -66,7 +66,7 @@ const getDetailsLesson = (id) => {
             })
             if (lesson === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The lesson is not defined',
                 })
             }
@@ -105,7 +105,7 @@ const deleteLesson = (id) => {
             })
             if (checkLesson === null) {
                 resolve({
-                    status: 'OK',
+                    status: 'ERR',
                     message: 'The lesson is not defined'
                 })
             }

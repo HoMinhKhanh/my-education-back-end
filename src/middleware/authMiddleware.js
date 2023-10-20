@@ -8,16 +8,15 @@ const authMiddleware = (req, res, next) => {
         if(err) {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
-        const { payload } = user
-        if(payload?.role === 'admin') {
+        if(user?.role === 'admin') {
             next()
         }else {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
     });
@@ -29,16 +28,15 @@ const authInstructorMiddleware = (req, res, next) => {
         if(err) {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
-        const { payload } = user
-        if(payload?.role === 'admin' || payload?.role === 'instructor') {
+        if(user?.role === 'admin' || user?.role === 'instructor') {
             next()
         }else {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
     });
@@ -51,16 +49,15 @@ const authUserMiddleware = (req, res, next) => {
         if(err) {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
-        const { payload } = user
-        if(payload?.role === 'admin' || payload?.id === userId) {
+        if(user?.role === 'admin' || user?.id === userId) {
             next()
         }else {
             return res.status(404).json({
                 message: 'The authentication',
-                status: 'ERROR'
+                status: 'ERR'
             })
         }
     });

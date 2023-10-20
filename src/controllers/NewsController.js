@@ -5,7 +5,7 @@ const createNews = async (req, res) => {
         const { title, content, images, author } = req.body
         if (!title || !content || !author) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The input is required'
             })
         }
@@ -25,7 +25,7 @@ const updateNews = async (req, res) => {
         const data = req.body
         if(!newsId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The newsId is require'
             })
         }
@@ -43,7 +43,7 @@ const getDetailsNews = async (req, res) => {
         const newsId = req.params.id
         if(!newsId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The newsId is require'
             })
         }
@@ -73,7 +73,7 @@ const deleteNews = async (req, res) => {
         const newsId = req.params.id
         if(!newsId) {
             return res.status(200).json({
-                status: 'error',
+                status: 'ERR',
                 message: 'The newsId is require'
             })
         }
