@@ -2,7 +2,7 @@ const Course = require('../models/CourseModel');
 
 const createCourse = (newCourse) => {
     return new Promise(async (resolve, reject) => {
-        const { name, description, image, type, level, price, listLessons } = newCourse
+        const { name, description, image, type, level, price, listLessons, member } = newCourse
         try {
             const createdCourse = await Course.create({
                 name, 
@@ -11,7 +11,8 @@ const createCourse = (newCourse) => {
                 type, 
                 level, 
                 price, 
-                listLessons
+                listLessons,
+                member,
             })
             if(createdCourse) {
                 resolve({
@@ -81,7 +82,7 @@ const getAllCourse = () => {
             const allCourse = await Course.find()
             resolve({
                 status: 'OK',
-                message: 'List all News',
+                message: 'List all Courses',
                 data: allCourse
             })
         } catch (e) {
