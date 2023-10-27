@@ -8,7 +8,7 @@ const courseSchema = new mongoose.Schema(
         type: { type: String },
         level: { type: String },
         price: { type: Number },
-        member: { type: String},
+        member: { type: Number , default: 0 },
         listLessons: [
             { 
                 lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' },

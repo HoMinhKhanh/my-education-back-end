@@ -2,7 +2,7 @@ const NewsService = require('../services/NewsService');
 
 const createNews = async (req, res) => {
     try {
-        const { title, content, images, author } = req.body
+        const { title, content, image, author, like } = req.body
         if (!title || !content || !author) {
             return res.status(200).json({
                 status: 'ERR',

@@ -76,14 +76,45 @@ const getDetailsCourse = (id) => {
     })
 };
 
-const getAllCourse = () => {
+const getAllCourse = (limit, page, sort, filter) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const allCourse = await Course.find()
+            const totalCourse = await Course.count()
+            if(filter) {
+                const label = filter[0]
+                const allCoursesFilter = await Course.find({
+                    [label]: { '$regex': filter[1] }
+                }).limit(limit).skip(page * limit)
+                resolve({
+                    status: 'OK',
+                    message: 'List all Courses after filtering',
+                    data: allCoursesFilter,
+                    total: totalCourse,
+                    pageCurrent: Number(page + 1),
+                    totalPage: Math.ceil(totalCourse / limit),
+                })
+            }
+            if(sort) {
+                const objectSort = {}
+                objectSort[sort[1]] = sort[0]
+                const allCoursesSort = await Course.find().limit(limit).skip(page * limit).sort(objectSort)
+                resolve({
+                    status: 'OK',
+                    message: 'List all Courses after sorting',
+                    data: allCoursesSort,
+                    total: totalCourse,
+                    pageCurrent: Number(page + 1),
+                    totalPage: Math.ceil(totalCourse / limit),
+                })
+            }
+            const allCourses = await Course.find().limit(limit).skip(page * limit)
             resolve({
                 status: 'OK',
                 message: 'List all Courses',
-                data: allCourse
+                data: allCourses,
+                total: totalCourse,
+                pageCurrent: Number(page + 1),
+                totalPage: Math.ceil(totalCourse / limit),
             })
         } catch (e) {
             reject(e);

@@ -2,13 +2,14 @@ const New = require('../models/NewModel');
 
 const createNews = (newNews) => {
     return new Promise(async (resolve, reject) => {
-        const { title, content, images, author } = newNews
+        const { title, content, image, author, like } = newNews
         try {
             const createNews = await New.create({
-                title, 
-                content, 
-                images, 
+                title,
+                content,
+                image,
                 author,
+                like,
             })
             if(createNews) {
                 resolve({

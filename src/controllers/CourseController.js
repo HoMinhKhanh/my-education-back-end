@@ -58,7 +58,8 @@ const getDetailsCourse = async (req, res) => {
 
 const getAllCourse = async (req, res) => {
     try {
-        const response = await CourseService.getAllCourse()
+        const { limit, page, sort, filter } = req.query
+        const response = await CourseService.getAllCourse(Number(limit) || 10, Number(page) || 0, sort, filter)
         return res.status(200).json(response)
     } catch (e) {
         return res.status(404).json({
