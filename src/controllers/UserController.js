@@ -130,6 +130,24 @@ const getDetailsUser = async (req, res) => {
     }
 };
 
+const getProfileUser = async (req, res) => {
+    try {
+        const userId = req.params.id
+        if(!userId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The userId is require'
+            })
+        }
+        const response = await UserService.getProfileUser(userId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 const refreshToken = async (req, res) => {
     try {
         const token = req.cookies.refresh_token
@@ -171,4 +189,5 @@ module.exports = {
     getDetailsUser,
     refreshToken,
     logoutUser,
+    getProfileUser,
 }

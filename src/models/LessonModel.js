@@ -6,7 +6,7 @@ const lessonSchema = new mongoose.Schema(
         description: { type: String },
         videoId: { type: String, required: true },
         courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
-        rating: { type: Number },
+        rating: { type: Number, default: 0 },
     },
     {
         timestamps: true,
