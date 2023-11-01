@@ -86,10 +86,29 @@ const deleteCourse = async (req, res) => {
     }
 };
 
+const deleteManyCourse = async (req, res) => {
+    try {
+        const ids = req.body.ids
+        if(!ids) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The ids is require'
+            })
+        }
+        const response = await CourseService.deleteManyCourse(ids)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 module.exports = { 
     createCourse,
     updateCourse,
     getDetailsCourse,
     getAllCourse,
     deleteCourse,
+    deleteManyCourse,
 }

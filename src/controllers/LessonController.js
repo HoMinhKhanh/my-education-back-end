@@ -85,10 +85,29 @@ const deleteLesson = async (req, res) => {
     }
 };
 
+const deleteManyLesson = async (req, res) => {
+    try {
+        const ids = req.body.ids
+        if(!ids) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The ids is require'
+            })
+        }
+        const response = await LessonService.deleteManyLesson(ids)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 module.exports = { 
     createLesson,
     updateLesson,
     getDetailsLesson,
     deleteLesson,
     getAllLesson,
+    deleteManyLesson,
 }

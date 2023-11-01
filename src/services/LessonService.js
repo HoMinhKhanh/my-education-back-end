@@ -121,10 +121,25 @@ const deleteLesson = (id) => {
     })
 };
 
+const deleteManyLesson = (ids) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await Lesson.deleteMany({ _id: ids }, { new: true })
+            resolve({
+                status: 'OK',
+                message: 'Delete lesson Success',
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createLesson,
     updateLesson,
     getDetailsLesson,
     deleteLesson,
     getAllLesson,
+    deleteManyLesson,
 }

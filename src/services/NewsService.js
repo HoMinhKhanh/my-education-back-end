@@ -143,10 +143,25 @@ const deleteNews = (id) => {
     })
 };
 
+const deleteManyNews = (ids) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await New.deleteMany({ _id: ids }, { new: true })
+            resolve({
+                status: 'OK',
+                message: 'Delete news Success',
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createNews,
     updateNews,
     getDetailsNews,
     getAllNews,
     deleteNews,
+    deleteManyNews,
 }

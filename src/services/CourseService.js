@@ -146,10 +146,25 @@ const deleteCourse = (id) => {
     })
 };
 
+const deleteManyCourse = (ids) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await Course.deleteMany({ _id: ids }, { new: true })
+            resolve({
+                status: 'OK',
+                message: 'Delete course Success',
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createCourse,
     updateCourse,
     getDetailsCourse,
     getAllCourse,
     deleteCourse,
+    deleteManyCourse,
 }
