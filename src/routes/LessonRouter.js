@@ -8,6 +8,6 @@ router.get('/details-lesson/:id', lessonController.getDetailsLesson)
 router.get('/get-all-lesson', lessonController.getAllLesson)
 router.delete('/delete-lesson/:id', lessonController.deleteLesson)
 router.post('/delete-many-lesson', lessonController.deleteManyLesson)
-
+router.post('/count-lesson/:id', lessonController.countLesson)
 
 module.exports = router

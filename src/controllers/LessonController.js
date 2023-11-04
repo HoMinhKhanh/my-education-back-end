@@ -103,6 +103,24 @@ const deleteManyLesson = async (req, res) => {
     }
 };
 
+const countLesson = async (req, res) => {
+    try {
+        const courseId = req.params.id
+        if(!courseId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The courseId is require'
+            })
+        }
+        const response = await LessonService.countLesson(courseId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 module.exports = { 
     createLesson,
     updateLesson,
@@ -110,4 +128,5 @@ module.exports = {
     deleteLesson,
     getAllLesson,
     deleteManyLesson,
+    countLesson,
 }

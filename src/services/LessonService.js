@@ -135,6 +135,23 @@ const deleteManyLesson = (ids) => {
     })
 };
 
+const countLesson = (courseId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const lessons = await Lesson.find({ courseId });
+            const count = await Lesson.countDocuments({ courseId });
+            resolve({
+                status: 'OK',
+                message: 'Count lesson Success',
+                data: lessons,
+                total: count,
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createLesson,
     updateLesson,
@@ -142,4 +159,5 @@ module.exports = {
     deleteLesson,
     getAllLesson,
     deleteManyLesson,
+    countLesson,
 }
