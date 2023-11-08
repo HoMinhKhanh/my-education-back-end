@@ -33,6 +33,40 @@ const createUser = (newUser) => {
     })
 };
 
+const createAdminUser = (newUser) => {
+    return new Promise(async (resolve, reject) => {
+        const { name, email, password, role, phone } = newUser
+        try {
+            const checkUser = await User.findOne({
+                email: email
+            })
+            if (checkUser !== null) {
+                resolve({
+                    status: 'ERR',
+                    message: 'The email is already in use'
+                })
+            }
+            const hash = bcrypt.hashSync(password, 10)
+            const createdUser = await User.create({
+                name,
+                email,
+                password: hash,
+                role,
+                phone,
+            })
+            if(createdUser) {
+                resolve({
+                    status: 'OK',
+                    message: 'Success',
+                    data: createdUser
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 const loginUser = (userLogin) => {
     return new Promise(async (resolve, reject) => {
         const { email, password } = userLogin
@@ -202,6 +236,21 @@ const getProfileUser = (id) => {
     })
 };
 
+const getAllInstructor = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const instructors = await User.find({ role: 'instructor' });
+            resolve({
+                status: 'OK',
+                message: 'List all instructor',
+                data: instructors
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createUser,
     loginUser,
@@ -211,4 +260,6 @@ module.exports = {
     getDetailsUser,
     getProfileUser,
     deleteManyUser,
+    createAdminUser,
+    getAllInstructor,
 }

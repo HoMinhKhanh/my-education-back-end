@@ -9,6 +9,7 @@ const courseSchema = new mongoose.Schema(
         level: { type: String },
         price: { type: Number },
         member: { type: Number , default: 0 },
+        instructorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         listLessons: [
             { 
                 lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' },

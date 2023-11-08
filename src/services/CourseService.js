@@ -2,7 +2,7 @@ const Course = require('../models/CourseModel');
 
 const createCourse = (newCourse) => {
     return new Promise(async (resolve, reject) => {
-        const { name, description, image, type, level, price, listLessons, member } = newCourse
+        const { name, description, image, type, level, price, listLessons, member, instructorId } = newCourse
         try {
             const createdCourse = await Course.create({
                 name, 
@@ -13,6 +13,7 @@ const createCourse = (newCourse) => {
                 price, 
                 listLessons,
                 member,
+                instructorId,
             })
             if(createdCourse) {
                 resolve({

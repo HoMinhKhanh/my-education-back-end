@@ -2,7 +2,7 @@ const CourseService = require('../services/CourseService');
 
 const createCourse = async (req, res) => {
     try {
-        const { name, description, image, type, level, price, listLessons, member } = req.body
+        const { name, description, image, type, level, price, listLessons, member, instructorId } = req.body
         if (!name || !description || !type || !price) {
             return res.status(200).json({
                 status: 'ERR',
