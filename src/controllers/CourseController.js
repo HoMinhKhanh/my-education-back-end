@@ -59,7 +59,25 @@ const getDetailsCourse = async (req, res) => {
 const getAllCourse = async (req, res) => {
     try {
         const { limit, page, sort, filter } = req.query
-        const response = await CourseService.getAllCourse(Number(limit) || 10, Number(page) || 0, sort, filter)
+        const response = await CourseService.getAllCourse(Number(limit) || 100, Number(page) || 0, sort, filter)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
+const getAllCourseInstructor = async (req, res) => {
+    try {
+        const instructorId = req.params.id
+        if(!instructorId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The instructorId is require'
+            })
+        }
+        const response = await CourseService.getAllCourseInstructor(instructorId)
         return res.status(200).json(response)
     } catch (e) {
         return res.status(404).json({
@@ -109,6 +127,7 @@ module.exports = {
     updateCourse,
     getDetailsCourse,
     getAllCourse,
+    getAllCourseInstructor,
     deleteCourse,
     deleteManyCourse,
 }

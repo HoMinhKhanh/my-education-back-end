@@ -123,6 +123,23 @@ const getAllCourse = (limit, page, sort, filter) => {
     })
 };
 
+const getAllCourseInstructor = (instructorId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const totalCourse = await Course.count({ instructorId: instructorId })
+            const allCourses = await Course.find({ instructorId: instructorId })
+            resolve({
+                status: 'OK',
+                message: 'List all Courses by instructor',
+                data: allCourses,
+                total: totalCourse,
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 const deleteCourse = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -166,6 +183,7 @@ module.exports = {
     updateCourse,
     getDetailsCourse,
     getAllCourse,
+    getAllCourseInstructor,
     deleteCourse,
     deleteManyCourse,
 }
