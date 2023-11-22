@@ -123,6 +123,23 @@ const getAllCourse = (limit, page, sort, filter) => {
     })
 };
 
+const getAllCourseType = (type) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const totalCourse = await Course.count({ type: type })
+            const allCourses = await Course.find({ type: type })
+            resolve({
+                status: 'OK',
+                message: 'List all Courses of type',
+                data: allCourses,
+                total: totalCourse,
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 const getAllCourseInstructor = (instructorId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -183,6 +200,7 @@ module.exports = {
     updateCourse,
     getDetailsCourse,
     getAllCourse,
+    getAllCourseType,
     getAllCourseInstructor,
     deleteCourse,
     deleteManyCourse,

@@ -19,6 +19,25 @@ const createAssignment = async (req, res) => {
     }
 };
 
+const updateAssignment = async (req, res) => {
+    try {
+        const assignmentId = req.params.id
+        const data = req.body
+        if(!assignmentId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The assignmentId is require'
+            })
+        }
+        const response = await AssignmentService.updateAssignment(assignmentId, data)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 const getDetailsAssignment = async (req, res) => {
     try {
         const assignmentId = req.params.id
@@ -29,6 +48,42 @@ const getDetailsAssignment = async (req, res) => {
             })
         }
         const response = await AssignmentService.getDetailsAssignment(assignmentId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
+const deleteAssignment = async (req, res) => {
+    try {
+        const assignmentId = req.params.id
+        if(!assignmentId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The assignmentId is require'
+            })
+        }
+        const response = await AssignmentService.deleteAssignment(assignmentId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
+const deleteManyAssignment = async (req, res) => {
+    try {
+        const ids = req.body.ids
+        if(!ids) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The ids is require'
+            })
+        }
+        const response = await AssignmentService.deleteManyAssignment(ids)
         return res.status(200).json(response)
     } catch (e) {
         return res.status(404).json({
@@ -57,6 +112,9 @@ const countAssignment = async (req, res) => {
 
 module.exports = { 
     createAssignment,
+    updateAssignment,
     getDetailsAssignment,
+    deleteAssignment,
+    deleteManyAssignment,
     countAssignment,
 }

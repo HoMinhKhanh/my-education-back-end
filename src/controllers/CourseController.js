@@ -68,6 +68,24 @@ const getAllCourse = async (req, res) => {
     }
 };
 
+const getAllCourseType = async (req, res) => {
+    try {
+        const type = req.params.type
+        if(!type) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The type is require'
+            })
+        }
+        const response = await CourseService.getAllCourseType(type)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
 const getAllCourseInstructor = async (req, res) => {
     try {
         const instructorId = req.params.id
@@ -127,6 +145,7 @@ module.exports = {
     updateCourse,
     getDetailsCourse,
     getAllCourse,
+    getAllCourseType,
     getAllCourseInstructor,
     deleteCourse,
     deleteManyCourse,
