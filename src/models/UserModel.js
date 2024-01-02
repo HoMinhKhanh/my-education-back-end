@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+const imageSchema = new mongoose.Schema({
+    src: { type: String },
+});
+
 const userSchema = new mongoose.Schema(
     {
         name: { type: String, default: 'student' },
@@ -8,7 +12,7 @@ const userSchema = new mongoose.Schema(
         role: { type: String, required: true, default: 'student' },
         phone: { type: Number },
         avatar: { type: String },
-        faceId: { type: String },
+        images: [imageSchema],
     },
     {
         timestamps: true,

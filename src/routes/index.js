@@ -5,6 +5,7 @@ const CourseRouter = require('./CourseRouter');
 const AttendanceRouter = require('./AttendanceRouter');
 const AssignmentRouter = require('./AssignmentRouter');
 const AnswerRouter = require('./AnswerRouter');
+const MyCourseRouter = require('./MyCourseRouter');
 
 const routes = (app) => {
     app.use('/api/user', UserRouter);
@@ -14,6 +15,7 @@ const routes = (app) => {
     app.use('/api/attendance', AttendanceRouter);
     app.use('/api/assignment', AssignmentRouter);
     app.use('/api/answer', AnswerRouter);
+    app.use('/api/mycourse', MyCourseRouter);
 };
 
 module.exports = routes
