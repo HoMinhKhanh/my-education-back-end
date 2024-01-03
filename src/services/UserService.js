@@ -251,6 +251,57 @@ const getAllInstructor = () => {
     })
 };
 
+const loginPasswork = (userLogin) => {
+    return new Promise(async (resolve, reject) => {
+        const { email } = userLogin
+        try {
+            const checkUser = await User.findOne({
+                email: email
+            })
+            if (checkUser === null) {
+                resolve({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+    
+            resolve({
+                status: 'OK',
+                message: 'Success',
+                data: checkUser,
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
+const updatePasswork = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const checkUser = await User.findOne({
+                _id: id,
+            })
+            if (checkUser === null) {
+                resolve({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+            const hash = bcrypt.hashSync(password, 10)
+
+            const updatedUser = await User.findByIdAndUpdate(id, {password: hash}, { new: true })
+            resolve({
+                status: 'OK',
+                message: 'Success',
+                data: updatedUser,
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 module.exports = { 
     createUser,
     loginUser,
@@ -262,4 +313,6 @@ module.exports = {
     deleteManyUser,
     createAdminUser,
     getAllInstructor,
+    loginPasswork,
+    updatePasswork,
 }

@@ -235,6 +235,53 @@ const getAllInstructor = async (req, res) => {
     }
 };
 
+const loginPasswork = async (req, res) => {
+    try {
+        const { email } = req.body
+        const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+        const isCheckEmail = reg.test(email)
+        if (!email) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The input is required'
+        })
+        } else if (!isCheckEmail) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The input is email'
+            })
+        }
+
+        const response = await UserService.loginPasswork(req.body)
+        const { refresh_token, ...newResponse } = response
+        return res.status(200).json(newResponse)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
+const updatePasswork = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const password = req.body
+        if(!userId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The userId is require'
+            })
+        }
+        const response = await UserService.updatePasswork(userId, password)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+};
+
+
 module.exports = { 
     createUser,
     loginUser,
@@ -248,4 +295,6 @@ module.exports = {
     deleteManyUser,
     createAdminUser,
     getAllInstructor,
+    loginPasswork,
+    updatePasswork,
 }

@@ -15,5 +15,7 @@ router.get('/get-details/:id',authUserMiddleware, userController.getDetailsUser)
 router.get('/get-profile/:id', userController.getProfileUser)
 router.post('/refresh-token', userController.refreshToken)
 router.get('/get-all-instructor', userController.getAllInstructor)
+router.post('/sign-in-passwork', userController.loginPasswork)
+router.put('/update-Passwork/:id', userController.updateUser)
 
 module.exports = router

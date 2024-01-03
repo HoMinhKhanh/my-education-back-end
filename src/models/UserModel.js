@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
         phone: { type: Number },
         avatar: { type: String },
         faceId: { type: String },
+       //   otp: { type: String},
     },
     {
         timestamps: true,
